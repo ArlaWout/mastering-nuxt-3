@@ -4,6 +4,7 @@
 			<div v-if="error.statusCode === '404'" class="prose">
 				<h1>404</h1>
 				<p>I guess that page doesnt exist</p>
+				<p class="font-bold">{{ error.message }}</p>
 			</div>
 			<div v-else class="prose">
 				<h1>Dang</h1>
