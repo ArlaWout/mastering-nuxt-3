@@ -15,11 +15,11 @@
 </template>
 <script lang="ts" setup>
 const supabase = useSupabaseClient();
-const user = await supabase.auth.getUser();
+const user = useSupabaseUser();
 
-const name = computed(() => user.data?.user?.user_metadata.full_name);
+const name = computed(() => user.value?.user_metadata.full_name);
 
-const profile = computed(() => user.data?.user?.user_metadata.avatar_url);
+const profile = computed(() => user.value?.user_metadata.avatar_url);
 
 const logout = async () => {
 	const { error } = await supabase.auth.signOut();
@@ -27,5 +27,7 @@ const logout = async () => {
 	if (error) {
 		console.error(error);
 	}
+
+	await navigateTo("/login");
 };
 </script>
