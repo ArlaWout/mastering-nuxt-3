@@ -3,12 +3,24 @@
 		<h1>Log in to {{ title }}</h1>
 		<button
 			class="bg-blue-800 text-white font-bold py-2 px-4 transition-all rounded hover:scale-90 hover:bg-blue-500"
+			@click="login"
 		>
 			Log in with Github
 		</button>
 	</div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { title } = useCourse();
+const supabase = useSupabaseClient();
+
+const login = async () => {
+	const { error } = await supabase.auth.signInWithOAuth({
+		provider: "github",
+	});
+
+	if (error) {
+		console.error(error);
+	}
+};
 </script>
